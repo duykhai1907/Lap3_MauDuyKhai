@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Duy_Khai___Lap_3.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,9 +9,20 @@ namespace Duy_Khai___Lap_3.Controllers
 {
     public class HomeController : Controller
     {
+
+        private ApplicationDbContext _dbContext;
+
+        public HomeController()
+        {
+            _dbContext = new ApplicationDbContext();
+        }
         public ActionResult Index()
         {
-            return View();
+            var upcommingCourses = _dbContext.Courses
+                
+                .Where(c => c.DateTime > DateTime.Now);
+
+            return View(upcommingCourses);
         }
 
         public ActionResult About()
