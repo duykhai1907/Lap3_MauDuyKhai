@@ -1,5 +1,5 @@
 ﻿using Duy_Khai___Lap_3.Models;
-using Duy_Khai___Lap_3.Views.ViewModels;
+using Duy_Khai___Lap_3.ViewModels;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
@@ -18,6 +18,17 @@ namespace Duy_Khai___Lap_3.Controllers
         {
             _dbContext = new ApplicationDbContext();
         }
+
+        [Authorize]
+        public ActionResult Create()
+        {
+            var viewModel = new CourseViewModel
+            {
+                Categories = _dbContext.Categories.ToList()
+            };
+            return View(viewModel);
+        }
+
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]

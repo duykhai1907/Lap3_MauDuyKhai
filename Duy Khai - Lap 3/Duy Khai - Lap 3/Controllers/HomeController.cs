@@ -20,7 +20,13 @@ namespace Duy_Khai___Lap_3.Controllers
         {
             var upcommingCourses = _dbContext.Courses
                 
+       
                 .Where(c => c.DateTime > DateTime.Now);
+            var viewModel = new CoursesViewModel
+            {
+                UpcommingCourses = upcommingCourses,
+                ShowAction = User.Identity.IsAuthenticated
+            };
 
             return View(upcommingCourses);
         }

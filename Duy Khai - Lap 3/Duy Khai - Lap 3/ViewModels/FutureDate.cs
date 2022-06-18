@@ -5,21 +5,22 @@ using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Duy_Khai___Lap_3.Models;
 
-namespace Duy_Khai___Lap_3.Views.ViewModels
+namespace Duy_Khai___Lap_3.ViewModels
 {
-    public class ValidTime : ValidationAttribute
+    public class FutureDate : ValidationAttribute
     {
         // GET: FutureDate
         public override bool IsValid(object value)
         {
             DateTime dateTime;
             var isValid = DateTime.TryParseExact(Convert.ToString(value),
-                "HH:mm",
+                "dd/M/yyyy",
                 CultureInfo.CurrentCulture,
                 DateTimeStyles.None,
                 out dateTime);
-            return isValid;
+            return (isValid && dateTime > DateTime.Now);
         }
     }
 }
